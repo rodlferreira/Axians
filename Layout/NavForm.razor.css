@@ -1,0 +1,175 @@
+Container
+.container {
+    margin-top: 46px;
+    display: flex;
+    font-family: Arial, sans-serif;
+    gap: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 402px;
+    left: 70px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 6px;
+    padding: 24px;
+    margin-top: 46px;
+}
+
+.option-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.option {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    color: #333;
+}
+
+.option.selected {
+    background-color: #e0e7ff;
+    color: #6c63ff;
+}
+
+.option.completed .status {
+    color: #6c63ff;
+}
+
+.status {
+    font-size: 16px;
+}
+
+.erro{
+    width: 100%;
+    background-color: #6c63ff;
+}
+
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
+.loading {
+    animation: rotate 1s infinite linear;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    margin-top: 50px;
+    border-radius: 6px;
+}
+
+.header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.header{
+    background-color: #f5f6fa;
+}
+
+.required {
+    color: #6c63ff;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-section label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-top: 8px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin-right: 5px;
+}
+
+select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 5px;
+}
+
+/* Table */
+.tax-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tax-table th, .tax-table td {
+    padding: 10px;
+    border: 1px solid #e0e7ff;
+    text-align: left;
+}
+
+.tax-table th {
+    background-color: #f5f6fa;
+    color: #6c63ff;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6c63ff;
+    font-size: 16px;
+}
+
+.add-taxa {
+    background-color: #6c63ff;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+.pagination select, .pagination button {
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: none;
+    color: #333;
+}
+
+.pagination button {
+    cursor: pointer;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}

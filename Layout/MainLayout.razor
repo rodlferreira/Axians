@@ -1,0 +1,60 @@
+﻿@inherits LayoutComponentBase
+<div class="page">
+    @* <div class="sidebar">
+    <NavMenu />
+    </div> *@
+
+    <main>
+        <div class="top-row px-4">
+            <div class="nav-left">
+
+                <img class="logo" aria-hidden="true" src="images/quadrado.png" asp-append-version="true" alt=""
+                    width="38px" height="38px" margin-top="-0.6rem">
+
+                <a href="#">Home</a>
+                <a href="#">Avisos</a>
+                <a href="#">Entidades</a>
+                <a href="#">Candidaturas</a>
+                <a href="#">Operações</a>
+            </div>
+
+            <div class="icons">
+                <img aria-hidden="true" src="images/Search.png" asp-append-version="true" alt="" width="32px"
+                    height="32px">
+                <img aria-hidden="true" src="images/Inbox.png" asp-append-version="true" alt="" width="32px"
+                    height="32px">
+                <img aria-hidden="true" src="images/Settings.png" asp-append-version="true" alt="" width="32px"
+                    height="32px">
+                <div class="avatar">
+                    <img aria-hidden="true" src="images/Avatar.png" asp-append-version="true" alt="" width="32px"
+                        height="32px">
+                    <img aria-hidden="true" src="images/Frame.png" asp-append-version="true" alt="" width="105px"
+                        height="34px">
+                </div>
+            </div>
+
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+
+
+</div>
+
+     <NavMenu />
+
+     <NavForm />
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

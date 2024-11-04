@@ -1,0 +1,147 @@
+@page "/taxas"
+
+<div class="container">
+
+    <div class="sidebar">
+        <ul class="option-list">
+            <li class="option completed">Opção 1 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 2 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 3 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 4 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 5 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 6 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 7 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 8 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option completed">Opção 9 <img aria-hidden="true" src="images/Pizza-Chart.png"
+                    asp-append-version="true" alt="" width="24px" height="24px"></li>
+            <li class="option selected">Opção 10 <span class="status loading">&#9711;</span></li>
+            <li class="option">Opção 11 <span class="status">&#9711;</span></li>
+            <li class="option">Opção 12 <span class="status">&#9711;</span></li>
+        </ul>
+    </div>
+
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Opção 10</h1>
+            <p class="required">* Campos de preenchimento obrigatório</p>
+        </div>
+
+        <div class="form-section">
+            <h2>Tipo de taxa</h2>
+            <label for="taxa-select">Adicionar tipo de taxa</label>
+            <select id="taxa-select">
+                <option>Selecionar</option>
+            </select>
+        </div>
+
+        <div class="form-section">
+            <h2>Contar *</h2>
+            <label><input type="radio" name="contar" value="sim"> Sim</label>
+            <label><input type="radio" name="contar" value="nao"> Não</label>
+        </div>
+
+        <div class="form-section">
+            <h2>Taxa *</h2>
+            <label><input type="checkbox" /> Adicionar taxa por localização</label>
+            <table class="tax-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>NUTS II</th>
+                        <th>NUTS III</th>
+                        <th>Concelho</th>
+                        <th>Taxa (%)</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var taxa in taxItems)
+                    {
+                        <tr>
+                            <td><input type="checkbox" @onchange="(e) => ToggleCheckbox(taxa, e.Value as bool?)"
+                                    checked="@taxa.Selected" /></td>
+                            <td>@taxa.NutsII</td>
+                            <td>@taxa.NutsIII</td>
+                            <td>@taxa.Concelho</td>
+                            <td>@taxa.Taxa</td>
+                            <td><button class="delete-btn">🗑</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button class="add-taxa">+ ADICIONAR TAXA</button>
+        </div>
+
+
+        @if (showError)
+        {
+            <div class="erro">
+                <p class="warning">Você só pode selecionar uma taxa por vez.</p>
+            </div>
+        }
+
+
+        <div class="pagination">
+            <span>1 de 2 páginas (23 itens)</span>
+            <select>
+                <option>10</option>
+                <option>20</option>
+            </select> itens por página
+            <button>&laquo;</button>
+            <button>&raquo;</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<TaxaItem> taxItems = new List<TaxaItem>
+{
+new TaxaItem { NutsII = "Norte", NutsIII = "Ave", Concelho = "Fafe", Taxa = "25%", Selected = false },
+new TaxaItem { NutsII = "Norte", NutsIII = "Área Metropolitana do Porto", Concelho = "Matosinhos", Taxa = "75%",
+Selected = false }
+};
+
+    private bool showError = false;
+
+    private void ToggleCheckbox(TaxaItem taxa, bool? isChecked)
+    {
+        if (isChecked == true)
+        {
+            int selectedCount = taxItems.Count(t => t.Selected);
+
+
+            if (selectedCount >= 1)
+            {
+                showError = true;
+                taxa.Selected = false;
+            }
+            else
+            {
+                showError = false;
+                taxa.Selected = true;
+            }
+        }
+        else
+        {
+            taxa.Selected = false;
+        }
+    }
+
+    public class TaxaItem
+    {
+        public string NutsII { get; set; }
+        public string NutsIII { get; set; }
+        public string Concelho { get; set; }
+        public string Taxa { get; set; }
+        public bool Selected { get; set; }
+    }
+}
